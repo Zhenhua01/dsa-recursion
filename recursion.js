@@ -1,20 +1,38 @@
+"use strict";
+
+
+// base case: end of array
+// progress: go thru each num
 /** product: calculate the product of an array of numbers. */
 
-function product(nums) {
+function product(nums, i = 0) {
+  if (i === nums.length) return 1;
 
+  return nums[i] * product(nums, i + 1);
 }
 
+// base case: end of array
+// progress: go thru each word
 /** longest: return the length of the longest word in an array of words. */
 
-function longest(words) {
+function longest(words, i = 0, max = 0) {
+  if (i === words.length) return max;
 
+  max = max > words[i].length ? max : words[i].length;
+
+  return longest(words, i + 1, max);
 }
 
+// base case: end of string
+// progress: increment by 2
 /** everyOther: return a string with every other letter. */
 
-function everyOther(str) {
+function everyOther(str, i = 0) {
+  if (i > str.length || str.length === 0) return "";
 
+  return str[i] + everyOther(str, i + 2);
 }
+
 
 /** find: return boolean depending on if val exists in array or not. */
 
