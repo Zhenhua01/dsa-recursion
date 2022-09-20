@@ -94,19 +94,35 @@ function gatherStrings(obj, out = []) {
 
 // FURTHER STUDY
 
+//base case: if val is in array return true
+//progress: start in middle, choose left or right based on comparison,
+//keep doing it until i > j
+
 /** binarySearch: given a sorted array of numbers, and a value,
  * return true if val is in array, false if not present). */
 
-function binarySearch(arr, val) {
-
+function binarySearch(arr, val, i = 0, j = arr.length - 1) {
+  if (i > j) return false;
+  let currIndx = Math.floor((j+i)/2)
+  if (arr[currIndx]===val) return true;
+  if(arr[currIndx] > val) return binarySearch(arr, val, i=i, j=currIndx-1)
+  if(arr[currIndx] < val) return binarySearch(arr, val, i=currIndx+1, j=j)
 }
 
+
+//base case: if val is in the array return current index
+//progress: start in middle, choose left or right based on comparison,
+//keep doing it until i > j
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
-function binarySearchIndex(arr, val) {
-
+function binarySearchIndex(arr, val, i = 0, j = arr.length - 1) {
+  if (i > j) return -1;
+  let currIndx = Math.floor((j+i)/2)
+  if (arr[currIndx]===val) return currIndx;
+  if(arr[currIndx] > val) return binarySearchIndex(arr, val, i=i, j=currIndx-1)
+  if(arr[currIndx] < val) return binarySearchIndex(arr, val, i=currIndx+1, j=j)
 }
 
 // you might find the above two problems easier if you change the function signature to:
