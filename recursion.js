@@ -56,24 +56,40 @@ function isPalindrome(str, i = 0, j = str.length - 1) {
 }
 
 //base case: out of letters in str
-//progress:
+//progress: go thru each letter
 /** revString: return a copy of a string, but in reverse. */
 
-function revString(str, i = str.length-1) {
+function revString(str, i = str.length - 1) {
   if (i === -1) return "";
-  return str[i]+ revString(str, i - 1);
+  return str[i] + revString(str, i - 1);
 }
 
+// base case: if match, return index
+// progress: go thru each word
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-function findIndex(arr, val) {
-  
+function findIndex(arr, val, i = 0) {
+  if (arr[i] === val) return i;
+  if (i === arr.length) return -1;
+  return findIndex(arr, val, i + 1);
 }
 
+// base case: end of objects
+// progress: go thru each object, nested objects, and object keys
+// typeof(obj) === 'object'
 /** gatherStrings: given an object, return an array of all of the string values. */
 
-function gatherStrings(obj) {
-
+function gatherStrings(obj, out = []) {
+  for (let key in obj) {
+    if (typeof (obj[key]) === 'object') {
+      gatherStrings(obj[key], out);
+    } else {
+      if (typeof (obj[key]) === 'string') {
+        out.push(obj[key]);
+      }
+    }
+  }
+  return out;
 }
 
 // FURTHER STUDY
